@@ -21,18 +21,19 @@ class HerMessageBubble extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox( height: 5, ),
-
+        const SizedBox(
+          height: 5,
+        ),
         _ImageBubble(),
-
-        const SizedBox( height: 10, ),
+        const SizedBox(
+          height: 10,
+        ),
       ],
     );
   }
 }
 
 class _ImageBubble extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -43,7 +44,17 @@ class _ImageBubble extends StatelessWidget {
         width: size.width * 0.7,
         height: 150,
         fit: BoxFit.cover,
-        ),
-      );
+        loadingBuilder: (contex, child, loadingProgress) {
+          if (loadingProgress == null) return child;
+
+          return Container(
+            width: size.width * 0.7,
+            height: 150,
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+            child: const Text("Enviando imagen..."),
+          );
+        },
+      ),
+    );
   }
 }
